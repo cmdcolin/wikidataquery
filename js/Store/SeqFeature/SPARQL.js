@@ -5,8 +5,7 @@ define([
     'dojo/request/xhr',
     'dojo/io-query',
     'JBrowse/Store/SeqFeature/SPARQL',
-    'JBrowse/Store/LRUCache',
-    'JBrowse/Util'
+    'JBrowse/Store/LRUCache'
 ],
 function(
     declare,
@@ -15,27 +14,8 @@ function(
     xhr,
     ioQuery,
     SPARQL,
-    LRUCache,
-    Util
+    LRUCache
 ) {
-
-    var Chunk = Util.fastDeclare({
-        constructor: function(minv,maxv,bin) {
-            this.minv = minv;
-            this.maxv = maxv;
-            this.bin = bin;
-        },
-        toUniqueString: function() {
-            return this.minv+'..'+this.maxv+' (bin '+this.bin+')';
-        },
-        toString: function() {
-            return this.toUniqueString();
-        },
-        fetchedSize: function() {
-            return this.maxv.block + (1<<16) - this.minv.block + 1;
-        }
-    });
-
     return declare(SPARQL, {
         getFeatures: function( query, featCallback, finishCallback, errorCallback ) {
             var thisB = this;
