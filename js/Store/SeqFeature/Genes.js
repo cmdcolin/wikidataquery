@@ -15,7 +15,7 @@ function (
                 PREFIX qualifier: <http://www.wikidata.org/prop/qualifier/> \
                 SELECT ?start ?end ?uniqueID ?strand ?uri ?entrezGeneID ?name ?description ?refSeq \
                 WHERE { \
-                    ?featureType wdt:P279 ; wdt:P703 ?strain; wdt:P351 ?uniqueID; wdt:P351 ?entrezGeneID; wdt:P2393 ?name; rdfs:label ?description; wdt:P644 ?start; wdt:P645 ?end; wdt:P2548 ?wdstrand ; p:P644 ?chr. \
+                    ?featureType wdt:P279 wd:Q7187; wdt:P703 ?strain; wdt:P351 ?uniqueID; wdt:P351 ?entrezGeneID; wdt:P2393 ?name; rdfs:label ?description; wdt:P644 ?start; wdt:P645 ?end; wdt:P2548 ?wdstrand ; p:P644 ?chr. \
                   OPTIONAL { \
                         ?chr qualifier:P2249 ?refSeq. \
                           FILTER(LANG(?description) = 'en'). \

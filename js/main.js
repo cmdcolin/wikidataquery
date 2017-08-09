@@ -7,7 +7,7 @@ function (
     JBrowsePlugin
 ) {
     return declare(JBrowsePlugin, {
-        constructor: function (/*args*/) {
+        constructor: function (/* args*/) {
             console.log('WikiData plugin starting');
         }
     });

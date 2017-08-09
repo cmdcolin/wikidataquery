@@ -58,7 +58,7 @@ function (
                         if (feature.get('start') > query.end) {
                             // past end of range, can stop iterating
                             return;
-                        } else if (feature.get('end') >= query.start){
+                        } else if (feature.get('end') >= query.start) {
                             // must be in range
                             featCallback(feature);
                         }
