@@ -2,6 +2,7 @@
 
 A small JBrowse plugin to query wikidata, used on http://wikigenomes.org
 
+
 # Setup
 
 An example track can be declared like this in tracks.conf
@@ -17,6 +18,9 @@ An example track can be declared like this in tracks.conf
 
 See test/data/ for sample data directory (or browse to http://localhost/jbrowse/?data=plugins/WikiData/test/data for example instance)
 
+## Screenshot
+
+![](img/1.png)
 
 ## Intallation
 
