@@ -38,8 +38,8 @@ function (
 
             var chunksProcessed = 0;
             var haveError = false;
-            for (var start = s; s < e; s += chunkSize) {
-                var chunk = { ref: query.ref, start: s, end: s + chunkSize };
+            for (var start = s; start < e; start += chunkSize) {
+                var chunk = { ref: query.ref, start: start, end: start + chunkSize };
                 chunk.toString = function () {
                     return query.ref + ',' + query.start + ',' + query.end;
                 };
@@ -47,14 +47,15 @@ function (
             }
 
             array.forEach(chunks, function (c) {
-                cache.get(c, function (f, e) {
-                    if (e && !haveError) {
-                        errorCallback(e);
+                cache.get(c, function (f, err) {
+                    if (err && !haveError) {
+                        errorCallback(err);
                     }
-                    if ((haveError = haveError || e)) {
+                    haveError = haveError || err;
+                    if (haveError) {
                         return;
                     }
-                    var feats = thisB._resultsToFeatures(f, function (feature) {
+                    thisB._resultsToFeatures(f, function (feature) {
                         if (feature.get('start') > query.end) {
                             // past end of range, can stop iterating
                             return;
@@ -64,7 +65,7 @@ function (
                         }
                     });
 
-                    if (++chunksProcessed == chunks.length) {
+                    if (++chunksProcessed === chunks.length) {
                         finishCallback();
                     }
                 });
@@ -83,12 +84,13 @@ function (
                 failOk: true
             }).then(function (o) {
                 callback(o);
-            }, function (e) {
+            }, function (err) {
+                console.error(err);
                 setTimeout(function () {
                     thisB._readChunk(query, callback);
                 }, query.backoff);
 
-                if(query.backoff) {
+                if (query.backoff) {
                     query.backoff *= 2;
                 } else {
                     query.backoff = 200;
