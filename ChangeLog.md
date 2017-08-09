@@ -1,3 +1,7 @@
+# Version 1.0.1
+
+- Add better query backoff
+
 # Version 1.0.0
 
 
