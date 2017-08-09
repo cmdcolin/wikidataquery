@@ -48,14 +48,20 @@ function (
 
             array.forEach(chunks, function (c) {
                 cache.get(c, function (f, e) {
-                    if (e && !haveError)                        {errorCallback(e);}
+                    if (e && !haveError) {
+                        errorCallback(e);
+                    }
                     if ((haveError = haveError || e)) {
                         return;
                     }
                     var feats = thisB._resultsToFeatures(f, function (feature) {
-                        if (feature.get('start') > query.end) // past end of range, can stop iterating
-                            {return;}                        else if (feature.get('end') >= query.start) // must be in range
-                            {featCallback(feature);}
+                        if (feature.get('start') > query.end) {
+                            // past end of range, can stop iterating
+                            return;
+                        } else if (feature.get('end') >= query.start){
+                            // must be in range
+                            featCallback(feature);
+                        }
                     });
 
                     if (++chunksProcessed == chunks.length) {
