@@ -72,7 +72,7 @@ function (
         },
         _readChunk: function (query, callback) {
             var thisB = this;
-            var backoff = 200;
+            var query.backoff = 200;
             var headers = {
                 'Accept': 'application/json',
                 'X-Requested-With': null
@@ -89,11 +89,7 @@ function (
                     thisB._readChunk(query, callback);
                 }, query.backoff);
 
-                if (query.backoff) {
-                    query.backoff *= 2;
-                } else {
-                    query.backoff = 200;
-                }
+                query.backoff *= 2;
             });
         }
     });
