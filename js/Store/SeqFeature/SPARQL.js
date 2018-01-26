@@ -25,7 +25,7 @@ function (
                 sizeFunction: function (features) {
                     return features.length;
                 },
-                maxSize: 100000 // cache up to 100,000 BAM features
+                maxSize: 100000
             });
             query.toString = function () {
                 return query.ref + ',' + query.start + ',' + query.end;
